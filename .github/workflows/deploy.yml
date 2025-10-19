@@ -21,7 +21,9 @@ jobs:
         run: |
           pip install -r requirements.txt -t package
           cp lambda_function.py package/
-          cp -r OrderManager package/
+          cp -r Controllers package/
+          cp -r Models package/
+          cp -r Services package/
           cd package && zip -r ../deploy.zip .
 
       - name: Configure AWS credentials
@@ -34,5 +36,5 @@ jobs:
       - name: Deploy to Lambda
         run: |
           aws lambda update-function-code \
-            --function-name shopify_app_order_manager \
+            --function-name ha-lambda-money-manager \
             --zip-file fileb://deploy.zip
